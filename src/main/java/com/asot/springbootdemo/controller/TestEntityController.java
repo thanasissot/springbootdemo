@@ -6,6 +6,8 @@ import com.asot.springbootdemo.service.TestEntityService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +23,13 @@ public class TestEntityController {
     public List<TestEntityDTO> getAllTestEntities() {
         log.info("getAllTestEntities request received.");
         return testEntityService.getAllTestEntities();
+    }
+
+    @GetMapping("/paginated")
+    public Page<TestEntityDTO> getAllUsers(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        return testEntityService.getAllTestEntitiesPaginated(PageRequest.of(page, size));
     }
 
     @PostMapping
