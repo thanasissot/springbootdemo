@@ -4,10 +4,12 @@ import com.asot.springbootdemo.dto.TestEntityDTO;
 import com.asot.springbootdemo.mapper.TestEntityMapper;
 import com.asot.springbootdemo.model.TestEntity;
 import com.asot.springbootdemo.repository.TestEntityRepository;
+import com.asot.springbootdemo.specifications.TestEntitySpecifications;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +24,16 @@ public class TestEntityService {
 
     public List<TestEntityDTO> getAllTestEntities() {
         return testEntityRepository.findAll()
+                .stream().map(testEntityMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<TestEntityDTO> getAllTestEntitiesByName(String name) {
+        Specification<TestEntity> spec = Specification.unrestricted();
+        if (name != null) {
+            spec = spec.and(TestEntitySpecifications.nameContains(name));
+        }
+        return testEntityRepository.findAll(spec)
                 .stream().map(testEntityMapper::toDTO)
                 .collect(Collectors.toList());
     }

@@ -25,6 +25,12 @@ public class TestEntityController {
         return testEntityService.getAllTestEntities();
     }
 
+    @GetMapping("/filter")
+    public List<TestEntityDTO> getAllTestEntitiesByName(@RequestParam("name") String name) {
+        log.info("getAllTestEntities request received.");
+        return testEntityService.getAllTestEntitiesByName(name);
+    }
+
     @GetMapping("/paginated")
     public Page<TestEntityDTO> getAllUsers(
             @RequestParam(defaultValue = "0") int page,
