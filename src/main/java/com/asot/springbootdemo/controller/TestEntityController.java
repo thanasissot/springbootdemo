@@ -1,7 +1,6 @@
 package com.asot.springbootdemo.controller;
 
 import com.asot.springbootdemo.dto.TestEntityDTO;
-import com.asot.springbootdemo.model.TestEntity;
 import com.asot.springbootdemo.service.TestEntityService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +17,11 @@ import java.util.List;
 @Log4j2
 public class TestEntityController {
     private final TestEntityService testEntityService;
+
+    @GetMapping("/logged")
+    public String logged() {
+        return "logged in";
+    }
 
     @GetMapping
     public List<TestEntityDTO> getAllTestEntities() {

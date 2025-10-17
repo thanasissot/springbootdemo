@@ -14,6 +14,18 @@ services:
       MARIADB_DATABASE: testdb
       MARIADB_USER: user
       MARIADB_PASSWORD: user
+  keycloak:
+    container_name: keycloakInstance
+    image: quay.io/keycloak/keycloak:latest
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    volumes:
+      - keycloak_data:/opt/keycloak/data
+    ports:
+      - "8180:8080"
+    command: start-dev
 
 volumes:
   mariadb_daba:
+  keycloak_data:
