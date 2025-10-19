@@ -1,6 +1,5 @@
 package com.asot.springbootdemo.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -8,14 +7,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class TestEntityDTO {
+public class TestEntityNoRelatedDTO {
     private Long id;
 
     @NotBlank(message = "Name is required")
@@ -24,6 +20,4 @@ public class TestEntityDTO {
     @Email(message = "Email should be valid")
     @NotBlank(message = "Email is required")
     private String email;
-
-    private List<RelatedTestEntityDTO> relatedEntities = new ArrayList<>();
 }
