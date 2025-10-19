@@ -119,6 +119,14 @@
             <artifactId>spring-security-oauth2-jose</artifactId>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-graphql -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-graphql</artifactId>
+        </dependency>
+
+        <!-- Optional: GraphiQL UI for manual testing (dev only) -->
+
     </dependencies>
 
     <build>
