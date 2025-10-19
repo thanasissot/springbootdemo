@@ -125,7 +125,10 @@
             <artifactId>spring-boot-starter-graphql</artifactId>
         </dependency>
 
-        <!-- Optional: GraphiQL UI for manual testing (dev only) -->
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+        </dependency>
 
     </dependencies>
 

@@ -16,7 +16,7 @@ public class MyScheduledTasks {
 
 
     private static int fixedRateCounter = 0;
-    @Scheduled(fixedRate = 5000) // Run every 5 seconds
+    @Scheduled(fixedRate = 15000, initialDelay = 15000) // Run every 5 seconds
     public void logMessageEvery5Seconds() {
         log.info("MyScheduledTasks::logMessageEvery5Seconds - executed {} times", fixedRateCounter++);
     }
