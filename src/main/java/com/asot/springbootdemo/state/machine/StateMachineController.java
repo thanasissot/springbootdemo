@@ -24,4 +24,12 @@ public class StateMachineController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping("/c")
+    public ResponseEntity<Void> sendContinueEventManually() {
+
+        stateMachineService.manuallySentContinueEvent();
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

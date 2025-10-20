@@ -1,15 +1,21 @@
 package com.asot.springbootdemo.state.machine;
 
-import com.asot.springbootdemo.state.machine.actions.ContinueAction;
+import com.asot.springbootdemo.model.StatusEntity;
+import com.asot.springbootdemo.repository.StatusEntityRepository;
+import com.asot.springbootdemo.state.machine.actions.*;
 import com.asot.springbootdemo.state.machine.enums.Events;
 import com.asot.springbootdemo.state.machine.enums.States;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.statemachine.config.EnableStateMachineFactory;
 import org.springframework.statemachine.config.EnumStateMachineConfigurerAdapter;
 import org.springframework.statemachine.config.builders.StateMachineStateConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineTransitionConfigurer;
+import reactor.core.publisher.Mono;
 
+import java.time.LocalDateTime;
 import java.util.EnumSet;
 
 @Configuration
@@ -18,7 +24,13 @@ import java.util.EnumSet;
 public class StateMachineConfiguration
     extends EnumStateMachineConfigurerAdapter<States, Events> {
 
+    public static final String ENTITY = "status_entity";
+    private final StatusEntityRepository statusEntityRepository;
     private final ContinueAction continueAction;
+    private final ExecuteServiceAction executeServiceAction;
+    private final Mono<Message<Events>> message = Mono.just(MessageBuilder
+            .withPayload(Events.CONTINUE)
+            .build());
 
     @Override
     public void configure(StateMachineStateConfigurer<States, Events> states)
@@ -27,6 +39,28 @@ public class StateMachineConfiguration
                 .withStates()
                 .initial(States.INITIAL)
                 .stateEntry(States.INITIAL, continueAction)
+                .stateEntry(States.PERMANENT_FAILURE, continueAction)
+                .stateEntry(States.FINISHED, context -> {
+                    LocalDateTime now = LocalDateTime.now();
+                    StatusEntity statusEntity = context.getExtendedState().get(ENTITY, StatusEntity.class);
+                    statusEntity.setCurrentState(States.FINISHED);
+                    statusEntity.setLastUpdatedTs(now);
+                    StatusEntity savedStatusEntity = statusEntityRepository.save(statusEntity);
+                })
+                .stateEntry(States.SERVICE_A_EXECUTING, executeServiceAction)
+                .stateEntry(States.SERVICE_B_EXECUTING, executeServiceAction)
+                .stateEntry(States.SERVICE_C_EXECUTING, executeServiceAction)
+
+                .stateEntry(States.SERVICE_A_OK, new StateEntryOkA(statusEntityRepository, States.SERVICE_A_OK))
+                .stateEntry(States.SERVICE_A_WARN, new StateEntryOkA(statusEntityRepository, States.SERVICE_A_WARN))
+                .stateEntry(States.SERVICE_B_OK, new StateEntryOkB(statusEntityRepository, States.SERVICE_B_OK))
+                .stateEntry(States.SERVICE_B_WARN, new StateEntryOkB(statusEntityRepository, States.SERVICE_B_WARN))
+                .stateEntry(States.SERVICE_C_OK, new StateEntryOkC(statusEntityRepository, States.SERVICE_C_OK))
+                .stateEntry(States.SERVICE_C_WARN, new StateEntryOkC(statusEntityRepository, States.SERVICE_C_WARN))
+                .stateEntry(States.SERVICE_A_ERROR, new StateEntryErrorA(statusEntityRepository, States.SERVICE_A_ERROR))
+                .stateEntry(States.SERVICE_B_ERROR, new StateEntryErrorB(statusEntityRepository, States.SERVICE_B_ERROR))
+                .stateEntry(States.SERVICE_C_ERROR, new StateEntryErrorC(statusEntityRepository, States.SERVICE_C_ERROR))
+
                 .states(EnumSet.allOf(States.class))
                 .end(States.FINISHED);
     }

@@ -14,9 +14,9 @@ public class ContinueAction implements Action<States, Events> {
     @Override
     public void execute(StateContext<States, Events> context) {
 
-        Message<Events> message = MessageBuilder
+        Mono<Message<Events>> message = Mono.just(MessageBuilder
                 .withPayload(Events.CONTINUE)
-                .build();
-        context.getStateMachine().sendEvent(Mono.just(message)).subscribe();
+                .build());
+        context.getStateMachine().sendEvent(message).subscribe();
     }
 }

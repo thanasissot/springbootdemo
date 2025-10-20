@@ -6,5 +6,10 @@ public enum Events {
     OK,
     WARN,
     ERROR,
-    PERMA_FAILURE,
+    PERMA_FAILURE;
+
+
+    public static Events fromServiceStatus(ServiceStatus status) {
+        return Events.valueOf(status.name());
+    }
 }

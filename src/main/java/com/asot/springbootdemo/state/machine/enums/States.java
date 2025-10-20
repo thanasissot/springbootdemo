@@ -2,6 +2,7 @@ package com.asot.springbootdemo.state.machine.enums;
 
 public enum States {
     INITIAL,
+    RUNNING,
     SERVICE_A_EXECUTING,
     SERVICE_A_OK,
     SERVICE_A_WARN,
@@ -27,5 +28,6 @@ public enum States {
     SERVICE_C_PERMANENT_FAILURE,
 
     PERMANENT_FAILURE,
-    FINISHED
+    FINISHED,
+    NAN
 }
