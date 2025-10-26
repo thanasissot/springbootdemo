@@ -1,0 +1,31 @@
+# Add first product
+curl -X POST http://localhost:8080/api/products \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Laptop",
+    "description": "High-performance gaming laptop",
+    "price": 1299.99
+  }'
+
+# Add second product
+curl -X POST http://localhost:8080/api/products \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Smartphone",
+    "description": "Latest model with advanced camera",
+    "price": 799.99
+  }'
+
+# Add third product
+curl -X POST http://localhost:8080/api/products \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Wireless Headphones",
+    "description": "Noise-cancelling bluetooth headphones",
+    "price": 199.99
+  }'
+
+curl http://localhost:8080/api/products
+# Search for products containing "phone"
+curl http://localhost:8080/api/products/search?name=phone
+curl http://localhost:8080/api/products/[ID]

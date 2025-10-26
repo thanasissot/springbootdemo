@@ -1,0 +1,46 @@
+### Add Laptop
+POST http://localhost:8081/api/products
+Content-Type: application/json
+
+{
+  "name": "Laptop",
+  "description": "High-performance gaming laptop",
+  "price": 1299.99
+}
+
+### Add Smartphone
+POST http://localhost:8081/api/products
+Content-Type: application/json
+
+{
+  "name": "Smartphone",
+  "description": "Latest model with advanced camera",
+  "price": 799.99
+}
+
+### Add Headphones
+POST http://localhost:8081/api/products
+Content-Type: application/json
+
+{
+  "name": "Wireless Headphones",
+  "description": "Noise-cancelling bluetooth headphones",
+  "price": 199.99
+}
+
+### Get all products
+GET http://localhost:8081/api/products
+
+### Search for products containing "phone"
+GET http://localhost:8081/api/products/search?name=phone
+
+### Get by product id 1
+GET http://localhost:8081/api/products/OC5ODZoBN49xcblOs3aC
+### Get by product id 2
+GET http://localhost:8081/api/products/Ni5ODZoBN49xcblOn3Za
+### Get by product id 3
+GET http://localhost:8081/api/products/Ny5ODZoBN49xcblOqXb6
+
+
+### Get by product id 4 - not exists
+GET http://localhost:8081/api/products/adsasdasdasdasdsadas
