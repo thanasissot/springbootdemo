@@ -1,7 +1,7 @@
 package com.asot.shared.service;
 
 import com.asot.shared.model.TradeOrder;
-import com.asot.shared.repository.OrderRepository;
+import com.asot.shared.repository.TradeOrderRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,10 +10,10 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class OrderService {
-    private final OrderRepository repository;
+public class TradeOrderService {
+    private final TradeOrderRepository repository;
 
-    public OrderService(OrderRepository repository) {
+    public TradeOrderService(TradeOrderRepository repository) {
         this.repository = repository;
     }
 

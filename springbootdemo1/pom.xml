@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>springbootdemo1</artifactId>
-    <version>${project.version}</version>
+    <version>1.0.0</version>
     <packaging>war</packaging>
     <name>springbootdemo1</name>
 
@@ -36,7 +36,7 @@
         <dependency>
             <groupId>com.asot</groupId>
             <artifactId>shared</artifactId>
-            <version>${project.version}</version>
+            <version>1.0.0</version>
         </dependency>
 
         <dependency>
@@ -73,11 +73,6 @@
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
             <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.mariadb.jdbc</groupId>
-            <artifactId>mariadb-java-client</artifactId>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

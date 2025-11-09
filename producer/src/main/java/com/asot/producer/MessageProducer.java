@@ -12,8 +12,8 @@ public class MessageProducer {
         this.jmsTemplate = jmsTemplate;
     }
 
-    public void sendMessage(String message) {
-        jmsTemplate.convertAndSend("test-queue", message);
+    public void sendMessage(String message, String destinationQueue) {
+        jmsTemplate.convertAndSend(destinationQueue, message);
         System.out.println("Sent: " + message);
     }
 }

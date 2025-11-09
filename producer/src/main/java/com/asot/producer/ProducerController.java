@@ -1,9 +1,6 @@
 package com.asot.producer;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/produce")
@@ -16,8 +13,8 @@ public class ProducerController {
     }
 
     @PostMapping
-    public String send(@RequestBody String message) {
-        producer.sendMessage(message);
+    public String send(@RequestBody String message, @RequestParam(name = "queue", required = false, defaultValue = "test-queue") String queue) {
+        producer.sendMessage(message, queue);
         return "Message sent: " + message;
     }
 }

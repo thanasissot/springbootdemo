@@ -1,0 +1,8 @@
+<NewTradeOrder>
+    <FromFintechCompanyId>1</FromFintechCompanyId>
+    <ToFintechCompanyId>2</ToFintechCompanyId>
+    <FromSalesman>1</FromSalesman>
+    <ToSalesman>2</ToSalesman>
+    <Amount>1234.50</Amount>
+    <Type>SUB</Type>
+</NewTradeOrder>

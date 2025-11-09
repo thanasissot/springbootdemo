@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -29,9 +30,24 @@ public class TradeOrder implements Serializable {
     @Column(unique = true, nullable = false)
     private String dealRef; // e.g. 2025110900001A
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TradeOrderType type;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "salesman_id", nullable = false)
-    private Salesman salesman;
+    @JoinColumn(name = "from_salesman_id", nullable = false)
+    private Salesman fromSalesman;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "from_fintech_company_id", nullable = false)
+    private FintechCompany fromFintechCompany;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "to_fintech_company_id", nullable = false)
+    private FintechCompany toFintechCompany;
+
+    @Column(nullable = false, precision = 8, scale = 2)
+    private BigDecimal amount;
 
     private LocalDateTime createdTs;
     private String createdBy;
