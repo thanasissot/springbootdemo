@@ -26,6 +26,29 @@ services:
       - "8180:8080"
     command: start-dev
 
+  activemq:
+    image: islandora/activemq:renovate.islandora-starter-site-digest
+    container_name: activemq
+    ports:
+      - "61616:61616" # JMS port
+      - "8161:8161"   # Web UI port
+  producer:
+    build: ./producer
+    depends_on:
+      - activemq
+    environment:
+      - SPRING_ACTIVEMQ_BROKER_URL=tcp://activemq:61616
+    ports:
+      - "8082:8082"
+  consumer:
+    build: ./consumer
+    depends_on:
+      - activemq
+    environment:
+      - SPRING_ACTIVEMQ_BROKER_URL=tcp://activemq:61616
+    ports:
+      - "8083:8083"
+
 volumes:
   mariadb_daba:
   keycloak_data:
