@@ -1,7 +1,7 @@
 package com.asot.springbootdemo1.machine;
 
-import com.asot.springbootdemo1.machine.enums.Events;
-import com.asot.springbootdemo1.machine.enums.States;
+import com.asot.shared.machine.enums.Events;
+import com.asot.shared.machine.enums.States;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.messaging.Message;
 import org.springframework.statemachine.StateContext;

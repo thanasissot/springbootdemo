@@ -1,7 +1,7 @@
 package com.asot.springbootdemo1.jobs;
 
-import com.asot.springbootdemo1.model.TestEntity;
-import com.asot.springbootdemo1.repository.TestEntityRepository;
+import com.asot.shared.model.TestEntity;
+import com.asot.shared.repository.TestEntityRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -16,7 +16,7 @@ public class MyScheduledTasks {
 
 
     private static int fixedRateCounter = 0;
-    @Scheduled(fixedRate = 15000, initialDelay = 15000) // Run every 5 seconds
+    @Scheduled(fixedRate = 150000, initialDelay = 15000) // Run every 5 seconds
     public void logMessageEvery5Seconds() {
         log.info("MyScheduledTasks::logMessageEvery5Seconds - executed {} times", fixedRateCounter++);
     }

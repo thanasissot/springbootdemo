@@ -1,7 +1,7 @@
 package com.asot.springbootdemo1.machine.actions;
 
-import com.asot.springbootdemo1.machine.enums.Events;
-import com.asot.springbootdemo1.machine.enums.States;
+import com.asot.shared.machine.enums.Events;
+import com.asot.shared.machine.enums.States;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.statemachine.StateContext;

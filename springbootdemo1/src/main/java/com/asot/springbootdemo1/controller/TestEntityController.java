@@ -1,7 +1,7 @@
 package com.asot.springbootdemo1.controller;
 
-import com.asot.springbootdemo1.dto.TestEntityDTO;
-import com.asot.springbootdemo1.service.TestEntityService;
+import com.asot.shared.dto.TestEntityDTO;
+import com.asot.shared.service.TestEntityService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

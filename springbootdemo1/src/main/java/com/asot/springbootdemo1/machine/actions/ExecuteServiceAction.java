@@ -1,9 +1,9 @@
 package com.asot.springbootdemo1.machine.actions;
 
 import com.asot.springbootdemo1.machine.ExecuteRequestsService;
-import com.asot.springbootdemo1.machine.enums.Events;
-import com.asot.springbootdemo1.machine.enums.ServiceStatus;
-import com.asot.springbootdemo1.machine.enums.States;
+import com.asot.shared.machine.enums.Events;
+import com.asot.shared.machine.enums.ServiceStatus;
+import com.asot.shared.machine.enums.States;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.messaging.Message;

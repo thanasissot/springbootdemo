@@ -1,10 +1,10 @@
 package com.asot.springbootdemo1.machine;
 
 import com.asot.springbootdemo1.machine.actions.*;
-import com.asot.springbootdemo1.machine.enums.Events;
-import com.asot.springbootdemo1.machine.enums.States;
-import com.asot.springbootdemo1.model.StatusEntity;
-import com.asot.springbootdemo1.repository.StatusEntityRepository;
+import com.asot.shared.machine.enums.Events;
+import com.asot.shared.machine.enums.States;
+import com.asot.shared.model.StatusEntity;
+import com.asot.shared.repository.StatusEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.Message;

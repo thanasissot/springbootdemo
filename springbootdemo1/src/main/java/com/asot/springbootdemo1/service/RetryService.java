@@ -1,6 +1,6 @@
 package com.asot.springbootdemo1.service;
 
-import com.asot.springbootdemo1.repository.TestEntityRepository;
+import com.asot.shared.repository.TestEntityRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.retry.annotation.Backoff;

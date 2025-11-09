@@ -1,7 +1,7 @@
 package com.asot.springbootdemo1.controller;
 
-import com.asot.springbootdemo1.model.CachedEntity;
-import com.asot.springbootdemo1.service.CashedEntityService;
+import com.asot.shared.model.CachedEntity;
+import com.asot.shared.service.CashedEntityService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.cache.annotation.CacheEvict;
