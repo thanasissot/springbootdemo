@@ -1,0 +1,88 @@
+### Add a parsed log entry from log line
+POST http://localhost:8082/api/logs/parse
+Content-Type: text/plain
+
+2025-01-20 06:07:26 [restartedMain] INFO  : Root WebApplicationContext: initialization completed in 1480 ms
+
+### Add another log entry - Hibernate version
+POST http://localhost:8082/api/logs/parse
+Content-Type: text/plain
+
+2025-01-20 10:15:42 [main] INFO  : HHH000412: Hibernate ORM core version 6.6.29.Final
+
+### Add error log entry
+POST http://localhost:8082/api/logs/parse
+Content-Type: text/plain
+
+2025-01-20 14:23:15 [http-nio-8080-exec-1] ERROR : Failed to process request: Connection timeout
+
+### Add structured log event directly
+POST http://localhost:8082/api/logs
+Content-Type: application/json
+
+{
+  "timestamp": "2025-01-20 09:30:15",
+  "thread": "scheduler-1",
+  "logLevel": "WARN",
+  "message": "HikariPool-1 - Thread starvation or clock leap detected",
+  "logger": "com.zaxxer.hikari.pool.HikariPool",
+  "application": "opensearch-demo",
+  "environment": "development",
+  "data": {
+    "level": "WARN",
+    "category": "connection-pool",
+    "component": "hikari-cp"
+  }
+}
+
+### Add DEBUG level log
+POST http://localhost:8082/api/logs
+Content-Type: application/json
+
+{
+  "timestamp": "2025-01-20 11:45:30",
+  "thread": "main",
+  "logLevel": "DEBUG",
+  "message": "Spring Security core version 6.2.1",
+  "logger": "org.springframework.security",
+  "application": "opensearch-demo",
+  "environment": "development",
+  "data": {
+    "level": "DEBUG",
+    "category": "framework",
+    "component": "spring-security"
+  }
+}
+
+### Add application-specific log
+POST http://localhost:8082/api/logs
+Content-Type: application/json
+
+{
+  "timestamp": "2025-01-20 16:20:45",
+  "thread": "task-executor-1",
+  "logLevel": "INFO",
+  "message": "Processing user registration for email: user@example.com",
+  "logger": "com.asot.opensearchdemo.service.UserService",
+  "application": "opensearch-demo",
+  "environment": "production",
+  "data": {
+    "level": "INFO",
+    "category": "business-logic",
+    "component": "user-service"
+  }
+}
+
+### Search requests for testing
+
+### Search by keyword
+GET http://localhost:8082/api/logs/search?keyword=Hibernate
+
+### Search by log level
+GET http://localhost:8082/api/logs/search/level?logLevel=ERROR
+
+### Advanced search with time range and filters
+GET http://localhost:8082/api/logs/search/advanced?startTime=2025-01-20 06:00:00&endTime=2025-01-20 23:59:59&logLevel=INFO&keyword=Spring
+
+### Search for specific Hibernate message
+GET http://localhost:8082/api/logs/search?keyword=HHH000412
