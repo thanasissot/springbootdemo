@@ -1,0 +1,25 @@
+package com.asot.springbootdemo1.controller;
+
+import com.asot.springbootdemo1.service.TestAsyncService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.concurrent.CompletableFuture;
+
+@RestController()
+@RequestMapping("/async")
+@RequiredArgsConstructor
+public class TestAsyncController {
+
+    private final TestAsyncService testAsyncService;
+
+    @GetMapping
+    public CompletableFuture<String> testAsync() {
+        return testAsyncService.testAsync()
+                .thenApply(list -> String.join("-||-", list));
+
+    }
+
+}
